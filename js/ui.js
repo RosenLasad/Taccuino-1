@@ -78,9 +78,12 @@
       const deleteButton = card.querySelector(".note-delete-btn");
 
       titleElement.textContent = note.title || "Nota senza titolo";
+      titleElement.title = note.title || "Nota senza titolo";
       categoryElement.textContent = capitalize(note.category || "altro");
       dateElement.textContent = dateFormatter.format(note.updatedAt || Date.now());
+      dateElement.title = dateElement.textContent;
       textElement.textContent = note.text || "";
+      if (note.text) textElement.title = note.text;
 
       renderBadges(note, badgesElement);
 
@@ -91,7 +94,7 @@
       if (!note.checklist || note.checklist.length === 0) {
         checklistElement.classList.add("hidden");
       } else {
-        note.checklist.slice(0, 4).forEach((item) => {
+        note.checklist.slice(0, 2).forEach((item) => {
           const li = document.createElement("li");
           li.textContent = item.text;
           if (item.done) li.classList.add("done");
